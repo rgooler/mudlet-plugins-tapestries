@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE MudletPackage>
+<MudletPackage version="1.0">
+    <AliasPackage>
+        <AliasGroup isActive="yes" isFolder="yes">
+            <name>TapsUI</name>
+            <script></script>
+            <command></command>
+            <packageName></packageName>
+            <regex></regex>
+            <Alias isActive="yes" isFolder="no">
+                <name>/me</name>
+                <script>send(&quot;:&quot; .. matches[2])</script>
+                <command></command>
+                <packageName></packageName>
+                <regex>^\/me (.*)$</regex>
+            </Alias>
+            <Alias isActive="yes" isFolder="no">
+                <name>forgot the = after p</name>
+                <script>send(&quot;p &quot; .. matches[2] .. &quot;=&quot; .. matches[3])</script>
+                <command></command>
+                <packageName></packageName>
+                <regex>^p ([a-zA-Z0-9_'-]+) (.*)$</regex>
+            </Alias>
+            <Alias isActive="yes" isFolder="no">
+                <name>forgot the =: after p</name>
+                <script>send(&quot;p &quot; .. matches[2] .. &quot;=:&quot; .. matches[3])</script>
+                <command></command>
+                <packageName></packageName>
+                <regex>^p ([a-zA-Z0-9_'-]+): (.*)$</regex>
+            </Alias>
+            <Alias isActive="yes" isFolder="no">
+                <name>forgot the = after w</name>
+                <script>send(&quot;w &quot; .. matches[2] .. &quot;=&quot; .. matches[3])</script>
+                <command></command>
+                <packageName></packageName>
+                <regex>^w ([a-zA-Z0-9_'-]+) (.*)$</regex>
+            </Alias>
+            <Alias isActive="yes" isFolder="no">
+                <name>forgot the =: after w</name>
+                <script>send(&quot;w &quot; .. matches[2] .. &quot;=:&quot; .. matches[3])</script>
+                <command></command>
+                <packageName></packageName>
+                <regex>^w ([a-zA-Z0-9_'-]+): (.*)$</regex>
+            </Alias>
+        </AliasGroup>
+    </AliasPackage>
+</MudletPackage>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE MudletPackage>
+<MudletPackage version="1.0">
+    <TriggerPackage>
+            <Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+                <name>Room Listing</name>
+                <script>room_listing_string =  &quot;&quot;
+room_list_printed = &quot;&quot;
+
+function room_listing_end()
+	if room_list_printed == &quot;&quot; then
+		echo(&quot;\n&quot;)
+		echo(room_listing_string)
+		room_list_printed = &quot;true&quot;
+	end
+	
+	room_listing_string = &quot;&quot;
+	disableTrigger(&quot;room_list_fixer&quot;)
+	disableTrigger(&quot;room_trigger_end&quot;)
+	return
+end	
+
+enableTrigger(&quot;room_list_fixer&quot;)
+tempTimer(0.1,[[room_listing_end()]])</script>
+                <triggerType>0</triggerType>
+                <conditonLineDelta>4</conditonLineDelta>
+                <mStayOpen>0</mStayOpen>
+                <mCommand></mCommand>
+                <packageName></packageName>
+                <mFgColor>#ff0000</mFgColor>
+                <mBgColor>#ffff00</mBgColor>
+                <mSoundFile></mSoundFile>
+                <colorTriggerFgColor>#000000</colorTriggerFgColor>
+                <colorTriggerBgColor>#000000</colorTriggerBgColor>
+                <regexCodeList>
+                    <string>Contents:</string>
+                </regexCodeList>
+                <regexCodePropertyList>
+                    <integer>2</integer>
+                </regexCodePropertyList>
+            </Trigger>
+            <Trigger isActive="no" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="yes" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+                <name>room_list_fixer</name>
+                <script>enableTrigger(&quot;room_trigger_end&quot;)
+
+csv = &quot;&quot;
+room_list_printed = &quot;&quot;
+
+if room_listing_string == &quot;&quot; then
+		csv = &quot;&quot;
+	else
+	csv = &quot;, &quot;
+end
+deleteLine()
+	
+room_listing_string = room_listing_string .. csv .. matches[2]</script>
+                <triggerType>0</triggerType>
+                <conditonLineDelta>2</conditonLineDelta>
+                <mStayOpen>0</mStayOpen>
+                <mCommand></mCommand>
+                <packageName></packageName>
+                <mFgColor>#ff0000</mFgColor>
+                <mBgColor>#ffff00</mBgColor>
+                <mSoundFile></mSoundFile>
+                <colorTriggerFgColor>#000000</colorTriggerFgColor>
+                <colorTriggerBgColor>#000000</colorTriggerBgColor>
+                <regexCodeList>
+                    <string>^([a-zA-Z0-9_'-]+)$</string>
+                </regexCodeList>
+                <regexCodePropertyList>
+                    <integer>1</integer>
+                </regexCodePropertyList>
+            </Trigger>
+            <Trigger isActive="no" isFolder="no" isTempTrigger="no" isMultiline="yes" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+                <name>room_trigger_end</name>
+                <script>room_listing_end()</script>
+                <triggerType>0</triggerType>
+                <conditonLineDelta>2</conditonLineDelta>
+                <mStayOpen>0</mStayOpen>
+                <mCommand></mCommand>
+                <packageName></packageName>
+                <mFgColor>#ff0000</mFgColor>
+                <mBgColor>#ffff00</mBgColor>
+                <mSoundFile></mSoundFile>
+                <colorTriggerFgColor>#000000</colorTriggerFgColor>
+                <colorTriggerBgColor>#000000</colorTriggerBgColor>
+                <regexCodeList>
+                    <string>^([a-zA-Z0-9_'-]+)$</string>
+                    <string>^([a-zA-Z0-9_'-]+)[ :]</string>
+                </regexCodeList>
+                <regexCodePropertyList>
+                    <integer>1</integer>
+                    <integer>1</integer>
+                </regexCodePropertyList>
+            </Trigger>
+    </TriggerPackage>
+</MudletPackage>

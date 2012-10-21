@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE MudletPackage>
+<MudletPackage version="1.0">
+    <ScriptPackage>
+        <ScriptGroup isActive="yes" isFolder="yes">
+            <name>TapsUI</name>
+            <packageName></packageName>
+            <script>-- Global vars, do not muck with
+
+tapsUI = tapsUI or {}
+tapsUI.left = tapsUI.left or {}
+tapsUI.left.friends = tapsUI.left.friends or {}
+tapsUI.top = tapsUI.top or {}
+tapsUI.top.chat = tapsUI.top.chat or {}
+
+
+
+</script>
+            <eventHandlerList/>
+            <ScriptGroup isActive="yes" isFolder="yes">
+                <name>UI</name>
+                <packageName></packageName>
+                <script>-------------------------------------------------
+--         Put your Lua functions here.        --
+--                                             --
+-- Note that you can also use external Scripts --
+-------------------------------------------------
+</script>
+                <eventHandlerList/>
+                <Script isActive="yes" isFolder="no">
+                    <name>topBar</name>
+                    <packageName></packageName>
+                    <script>--Separation line for UI purposes
+tapsUI.top.separator = Geyser.Label:new({ 
+    name=&quot;tapsUI.top.separator&quot;,
+    x=100, y=200,
+    width=&quot;100%&quot;, height=3 })
+
+tapsUI.top.separator:setColor(255, 255, 255)
+tapsUI.top.separator2 = Geyser.Label:new({ 
+    name=&quot;tapsUI.top.separator2&quot;,
+    x=110, y=203,
+    width=&quot;100%&quot;, height=2 })
+
+tapsUI.top.separator2:setColor(128, 128, 128)
+
+
+mainWidth, mainHeight = getMainWindowSize()
+
+--Framework for Chat window
+tapsUI.top.container = Geyser.Container:new({
+    name=&quot;tapsUI.top.container&quot;,
+    x=115, y=0,
+    width=mainWidth - 120, height=200 })
+
+tapsUI.top.chat.miniconsole = Geyser.MiniConsole:new({
+    name=&quot;tapsUI.top.chat.miniconsole&quot;,
+    x=0, y=0,
+    width=&quot;100%&quot;, height=&quot;100%&quot;},
+    tapsUI.top.container)
+
+tapsUI.top.chat.miniconsole:setColor(0, 0, 0)
+setWindowWrap(&quot;tapsUI.top.chat.miniconsole&quot;, 85)
+setMiniConsoleFontSize(&quot;tapsUI.top.chat.miniconsole&quot;, 10)</script>
+                    <eventHandlerList/>
+                </Script>
+                <Script isActive="yes" isFolder="no">
+                    <name>leftBar</name>
+                    <packageName></packageName>
+                    <script>--Separation line for UI purposes
+tapsUI.left.Vboxseparator = Geyser.Label:new({ 
+    name=&quot;tapsUI.left.Vboxseparator&quot;,
+    x=110, y=0,
+    width=3, height=&quot;100%&quot; })
+
+tapsUI.left.Vboxseparator:setColor(255, 255, 255)
+tapsUI.left.Vboxseparator2 = Geyser.Label:new({ 
+    name=&quot;tapsUI.left.Vboxseparator2&quot;,
+    x=113, y=0,
+    width=2, height=&quot;100%&quot; })
+
+tapsUI.left.Vboxseparator2:setColor(128, 128, 128)
+
+-- Framework for Friends list, and room list
+tapsUI.left.container = Geyser.Container:new({
+    name=&quot;tapsUI.left.container&quot;,
+    x=0, y=0,
+    width=110, height=&quot;100%&quot; })
+
+tapsUI.left.friends.label = Geyser.Label:new({
+    name=&quot;tapsUI.left.friends.label&quot;,
+    x=0, y=0,
+    height=12, width=110},
+    tapsUI.left.container)
+tapsUI.left.friends.label:echo(&quot;Friends&quot;, &quot;black&quot;, &quot;c&quot;)
+tapsUI.left.friends.label:setColor(0, 255, 0)
+
+tapsUI.left.friends.miniconsole = Geyser.MiniConsole:new({
+    name=&quot;tapsUI.left.friends.miniconsole&quot;,
+    x=0, y=12,
+    width=110, height=&quot;100%&quot;},
+    tapsUI.left.container)
+
+tapsUI.left.friends.miniconsole:setColor(0, 0, 0)
+setMiniConsoleFontSize(&quot;tapsUI.left.friends.miniconsole&quot;, 10)</script>
+                    <eventHandlerList/>
+                    <ScriptGroup isActive="yes" isFolder="yes">
+                        <name>chat</name>
+                        <packageName></packageName>
+                        <script>tapsUI.chat = tapsUI.chat or {}</script>
+                        <eventHandlerList/>
+                        <Script isActive="yes" isFolder="no">
+                            <name>whisper</name>
+                            <packageName></packageName>
+                            <script>function tapsUI.chat.whisper()
+  selectCurrentLine()
+  copy()
+  deleteLine()
+  cecho(&quot;tapsUI.top.chat.miniconsole&quot;, &quot;&lt;cyan&gt;&quot; .. line .. &quot;&lt;reset&gt;\n&quot;)
+  playSoundFile(getMudletHomeDir().. [[/tapsui/chat.wav]])
+
+end</script>
+                            <eventHandlerList/>
+                        </Script>
+                        <Script isActive="yes" isFolder="no">
+                            <name>tell</name>
+                            <packageName></packageName>
+                            <script>function tapsUI.chat.tell()
+  selectCurrentLine()
+  copy()
+  deleteLine()
+  cecho(&quot;tapsUI.top.chat.miniconsole&quot;, &quot;&lt;yellow&gt;&quot; .. line .. &quot;&lt;reset&gt;\n&quot;)
+  playSoundFile(getMudletHomeDir().. [[/tapsui/chat.wav]])
+ 
+end</script>
+                            <eventHandlerList/>
+                        </Script>
+                    </ScriptGroup>
+                </Script>
+            </ScriptGroup>
+            <ScriptGroup isActive="yes" isFolder="yes">
+                <name>friend</name>
+                <packageName></packageName>
+                <script>tapsUI.friend = tapsUI.friend or {}</script>
+                <eventHandlerList/>
+                <Script isActive="yes" isFolder="no">
+                    <name>addFriend</name>
+                    <packageName></packageName>
+                    <script>function tapsUI.friend.addFriend(friend)
+  --Filter out garbage
+  if friend == &quot;Done&quot; then return end
+  if friend == &quot;Players&quot; then return end
+  if friend == &quot;for&quot; then return end
+  if friend == &quot;whom&quot; then return end
+  if friend == &quot;you&quot; then return end
+  if friend == &quot;are&quot; then return end
+  if friend == &quot;watching&quot; then return end
+  if friend == &quot;online&quot; then return end
+  cecho(&quot;tapsUI.left.friends.miniconsole&quot;, &quot;&lt;green&gt;&quot; .. friend .. &quot;&lt;reset&gt;\n&quot;)
+  deleteLine()
+end</script>
+                    <eventHandlerList/>
+                </Script>
+                <Script isActive="yes" isFolder="no">
+                    <name>clearFriends</name>
+                    <packageName></packageName>
+                    <script>function tapsUI.friend.clearFriends()
+    clearWindow(&quot;tapsUI.left.friends.miniconsole&quot;)
+end</script>
+                    <eventHandlerList/>
+                </Script>
+            </ScriptGroup>
+            <ScriptGroup isActive="yes" isFolder="yes">
+                <name>General</name>
+                <packageName></packageName>
+                <script>tapsUI.general = tapsUI.general or {}</script>
+                <eventHandlerList/>
+                <Script isActive="yes" isFolder="no">
+                    <name>wrapLine</name>
+                    <packageName></packageName>
+                    <script>-- Wrap a line at n characters, return a list
+
+function tapsUI.general.wrapLine(line, col)
+  out = {}
+  return out
+  --local cutline = string.cut(line, col)
+  --if cutline == line then
+  --  table.insert(out, line)
+  --else
+  --  while cutline ~= line do
+  --      table.insert(out, cutline)
+  --      cutline = string.cut(line, col)
+  --      line = string.sub(line, col + 1, -1)
+  --  end
+  --  table.insert(out, line)
+  --end
+
+  --return out
+end</script>
+                    <eventHandlerList/>
+                </Script>
+            </ScriptGroup>
+        </ScriptGroup>
+    </ScriptPackage>
+</MudletPackage>

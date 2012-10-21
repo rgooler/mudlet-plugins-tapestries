@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE MudletPackage>
+<MudletPackage version="1.0">
+    <TimerPackage>
+        <Timer isActive="yes" isFolder="no" isTempTimer="no">
+            <name>Watchfor</name>
+            <script>send(&quot;wf&quot;)</script>
+            <command></command>
+            <packageName></packageName>
+            <time>00:01:00.000</time>
+        </Timer>
+    </TimerPackage>
+</MudletPackage>
